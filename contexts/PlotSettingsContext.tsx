@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
 export type XAxisType = "mjd" | "dsfo" | "peak";
-type YAxisType = "apparent" | "absolute";
+export type YAxisType = "apparent" | "absolute" | "diff_max";
 type PlotType = "magnitude" | "color";
 export type ColorOption = "U" | "V" | "B" | "UVW1" | "UVW2" | "UVM2";
 

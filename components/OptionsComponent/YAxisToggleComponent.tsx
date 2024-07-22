@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { usePlotSettings } from "../../contexts/PlotSettingsContext";
 import { useSelectedSNe } from "../../contexts/SelectedSNeContext";
-import Switch from "@mui/material/Switch";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import type { YAxisType } from "../../contexts/PlotSettingsContext";
 
 interface YAxisToggleComponentProps {
   onNoData: (message: string) => void;
@@ -10,58 +12,45 @@ interface YAxisToggleComponentProps {
 const YAxisToggleComponent: React.FC<YAxisToggleComponentProps> = ({ onNoData }) => {
   const { yAxisType, setYAxisType } = usePlotSettings();
   const { selectedSNe, setSelectedSNe } = useSelectedSNe();
-  const [checked, setChecked] = useState(yAxisType === "absolute");
 
-  useEffect(() => {
-    setChecked(yAxisType === "absolute");
-  }, [yAxisType]);
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newYAxisType: YAxisType | null
+  ) => {
+    if (newYAxisType !== null) {
+      if (newYAxisType === "absolute") {
+        const filteredSNe = selectedSNe.filter((sn) => sn.distance_modulus !== null);
+        const removedSNe = selectedSNe.filter((sn) => sn.distance_modulus === null);
 
-  const handleChange = () => {
-    const newChecked = !checked;
-    setChecked(newChecked);
+        if (removedSNe.length > 0) {
+          const snNames = removedSNe.map((sn) => sn.sn_name).join(", ");
+          onNoData(`The following supernovae have been removed due to missing distance modulus: ${snNames}`);
+        }
 
-    if (newChecked) {
-      // Toggling from apparent to absolute
-      const filteredSNe = selectedSNe.filter((sn) => sn.distance_modulus !== null);
-      const removedSNe = selectedSNe.filter((sn) => sn.distance_modulus === null);
-
-      if (removedSNe.length > 0) {
-        const snNames = removedSNe.map((sn) => sn.sn_name).join(", ");
-        onNoData(`The following supernovae have been removed due to missing distance modulus: ${snNames}`);
+        setSelectedSNe(filteredSNe);
       }
-
-      setSelectedSNe(filteredSNe);
-      setYAxisType("absolute");
-    } else {
-      // Toggling from absolute to apparent
-      setYAxisType("apparent");
+      setYAxisType(newYAxisType);
     }
   };
 
   return (
-    <div className="flex items-center">
-      <span className={`mr-2 ${checked ? 'text-gray-400' : 'text-black'}`}>apparent</span>
-      <Switch
-        checked={checked}
-        onChange={handleChange}
-        inputProps={{ "aria-label": "controlled" }}
-        sx={{
-          '& .MuiSwitch-switchBase': {
-            '&.Mui-checked': {
-              '& + .MuiSwitch-track': {
-                backgroundColor: '#1976d2',
-              },
-            },
-          },
-          '& .MuiSwitch-track': {
-            backgroundColor: 'rgba(0, 0, 0, 0.26)',
-            opacity: 1,
-          },
-        }}
-      />
-      <span className={`ml-2 ${checked ? 'text-black' : 'text-gray-400'}`}>absolute</span>
-    </div>
+    <ToggleButtonGroup
+      value={yAxisType}
+      exclusive
+      onChange={handleChange}
+      aria-label="y-axis type"
+    >
+      <ToggleButton value="apparent" aria-label="apparent">
+        Apparent
+      </ToggleButton>
+      <ToggleButton value="absolute" aria-label="absolute">
+        Absolute
+      </ToggleButton>
+      <ToggleButton value="diff_max" aria-label="diff_max">
+        Diff Max
+      </ToggleButton>
+    </ToggleButtonGroup>
   );
-}
+};
 
 export default YAxisToggleComponent;

@@ -71,6 +71,12 @@ const PlotComponent: React.FC = () => {
                     ...data,
                     y: sn.distance_modulus !== null ? data.y - sn.distance_modulus : data.y
                   }));
+                } else if (yAxisType === "diff_max") {
+                  const maxMagnitude = Math.min(...combinedData.map(data => data.y));
+                  combinedData = combinedData.map(data => ({
+                    ...data,
+                    y: data.y - maxMagnitude
+                  }));
                 }
 
                 combinedData.sort((a, b) => a.x - b.x);
@@ -205,7 +211,8 @@ const PlotComponent: React.FC = () => {
           },
           yaxis: {
             title: plotType === "magnitude" 
-              ? (yAxisType === "absolute" ? "Absolute Magnitude" : "Apparent Magnitude")
+              ? (yAxisType === "absolute" ? "Absolute Magnitude" : 
+                 yAxisType === "diff_max" ? "Magnitude (Diff from Max)" : "Apparent Magnitude")
               : `${firstColor} - ${secondColor}`,
             autorange: plotType === "magnitude" ? "reversed" : true
           },
