@@ -81,7 +81,7 @@ npm run dev
 
 ## 📝 Documentation
 
-Additional documentation is available at the [Wiki](ADD_WIKI_LINK).
+Additional documentation is available at the [Wiki](/docs).
 
 ## 📄 License
 
