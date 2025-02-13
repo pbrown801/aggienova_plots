@@ -1,7 +1,7 @@
 import pandas as pd
 
 big_list_path = "./data/csv/updated.csv"
-modulus_path = "./data/csvNewSwiftSNweblist.csv"
+modulus_path = "./data/csv/NewSwiftSNweblist.csv"
 
 
 def csv_to_dataframe(file_path: str, cols: list[str]) -> pd.DataFrame:
