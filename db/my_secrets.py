@@ -1,2 +1,6 @@
-url = "https://humhlcjwqekroapaifuq.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1bWhsY2p3cWVrcm9hcGFpZnVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg0NjU0NzYsImV4cCI6MjAyNDA0MTQ3Nn0.-AV11JwsCy50SkLPqrgE7W6hcvkkZOwBVR5IQBdyeqc"
+#url = "https://rudlyvzmhcmzjjkhkusg.supabase.co"
+#key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ1ZGx5dnptaGNtempqa2hrdXNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQxMTM1NTAsImV4cCI6MjA0OTY4OTU1MH0.VwSayIXhmq99uBhqcbFUe6O6t70qBYuSixWOLX5UPZw"
+
+
+url = "https://zhnfdivoqettgdgwjqun.supabase.co"
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpobmZkaXZvcWV0dGdkZ3dqcXVuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4OTEwMDgsImV4cCI6MjA1ODQ2NzAwOH0.a2tyCyWEXLrYvzbY3Qibv7rL_liB_sSwGa_wSm-9UBE"
